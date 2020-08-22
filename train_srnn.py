@@ -89,10 +89,17 @@ parser.add_argument(
     '--debug', help='dont sample softmax', type=int, required=False, default=0)
 parser.add_argument(
     '--samplerate',
-    help='number of epochs to run ',
+    help='sr',
     type=int,
     required=False,
     default=16000)
+parser.add_argument(
+    '--seconds',
+    help='seconds',
+    type=float,
+    required=False,
+    default=4)
+
 
 args = parser.parse_args()
 SLOW_DIM = args.slowdim
@@ -155,7 +162,7 @@ if args.sample:
         print('failed to plot models to png')
         pass
 
-    w = pred_srnn.sample(4 * args.samplerate, random_state, args.debug)
+    w = pred_srnn.sample(args.seconds * args.samplerate, random_state, args.debug)
     fs = args.samplerate
     wavfile.write("generated.wav", fs, soundsc(w))
     exit(0)
