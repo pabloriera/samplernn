@@ -162,9 +162,9 @@ if args.sample:
         print('failed to plot models to png')
         pass
 
-    w = pred_srnn.sample(args.seconds * args.samplerate, random_state, args.debug)
+    w = pred_srnn.sample(int(args.seconds * args.samplerate), random_state, args.debug)
     fs = args.samplerate
-    wavfile.write("generated.wav", fs, soundsc(w))
+    wavfile.write("generated_{}.wav".format(args.seconds), fs, soundsc(w))
     exit(0)
 
 frame_size = 1
