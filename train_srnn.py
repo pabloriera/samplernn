@@ -100,6 +100,12 @@ parser.add_argument(
     required=False,
     default=4)
 
+parser.add_argument(
+    '--random_state',
+    help='random_state',
+    type=int,
+    required=False,
+    default=1999)
 
 args = parser.parse_args()
 SLOW_DIM = args.slowdim
@@ -164,7 +170,7 @@ if args.sample:
 
     w = pred_srnn.sample(int(args.seconds * args.samplerate), random_state, args.debug)
     fs = args.samplerate
-    wavfile.write("generated_{}.wav".format(args.seconds), fs, soundsc(w))
+    wavfile.write("generated.wav", fs, soundsc(w))
     exit(0)
 
 frame_size = 1
